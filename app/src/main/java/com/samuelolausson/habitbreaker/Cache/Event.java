@@ -23,4 +23,28 @@ public class Event {
         this.emotionalState = emotionalState;
         this.location = location;
     }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public EmotionalState getEmotionalState() {
+        return emotionalState;
+    }
+
+    public void setEmotionalState(EmotionalState emotionalState) {
+        this.emotionalState = emotionalState;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
 }
