@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.Date;
+
 public class CacheTest {
 
     Cache cache;
@@ -20,7 +22,7 @@ public class CacheTest {
     @Test
     public void singletonTest() {
         Assertions.assertEquals(0, Cache.getCacheInstance().getHabits().size());
-        cache.addHabit(new Habit());
+        cache.addHabit(new Habit("Test_Name", new Date()));
         Assertions.assertEquals(1, Cache.getCacheInstance().getHabits().size());
     }
 }
