@@ -11,25 +11,55 @@
         android:id="@+id/textview_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_second"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
+<!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
 
-    <Button
-        android:id="@+id/button_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+<!--    <Button-->
+<!--        android:id="@+id/button_second"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/previous"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/input_layout" />-->
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
+        android:id="@+id/input_layout"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp">
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RadioButton
+                android:id="@+id/resistRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Resisted" />
+
+            <RadioButton
+                android:id="@+id/relapseRadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Relapsed" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/emotionalStateTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:paddingLeft="5dp"
+            android:text="Emotional State" />
 
         <CheckBox
             android:id="@+id/checkbox_happy"
@@ -61,16 +91,69 @@
             android:layout_height="wrap_content"
             android:text="BORED" />
 
+        <CheckBox
+            android:id="@+id/checkbox_lonely"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LONELY" />
+
+        <TextView
+            android:id="@+id/reasoningTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:paddingLeft="5dp"
+            android:text="Reasoning for Success/Relapse" />
+
         <EditText
             android:id="@+id/message_text"
             android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Type your reasoning here" />
+
+        <TextView
+            android:id="@+id/dateTimeTitle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Type your message here" />
+            android:textSize="20dp"
+            android:paddingLeft="5dp"
+            android:text="Time of Day" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/timeSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+
+            <Spinner
+                android:id="@+id/amPmSpinner"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/locationTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:paddingLeft="5dp"
+            android:text="Location" />
+
+        <EditText
+            android:id="@+id/location_text"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Type the location here" />
 
         <Button
             android:id="@+id/submit_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="Submit" />
 
     </LinearLayout>
