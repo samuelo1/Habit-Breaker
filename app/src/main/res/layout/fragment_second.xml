@@ -43,13 +43,13 @@
                 android:id="@+id/resistRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Resisted" />
+                android:text="@string/resisted" />
 
             <RadioButton
                 android:id="@+id/relapseRadio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Relapsed" />
+                android:text="@string/relapsed" />
 
         </RadioGroup>
 
@@ -59,43 +59,43 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:paddingLeft="5dp"
-            android:text="Emotional State" />
+            android:text="@string/emotion_state_title" />
 
         <CheckBox
             android:id="@+id/checkbox_happy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="HAPPY" />
+            android:text="@string/happy" />
 
         <CheckBox
             android:id="@+id/checkbox_sad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="SAD" />
+            android:text="@string/sad" />
 
         <CheckBox
             android:id="@+id/checkbox_angry"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ANGRY" />
+            android:text="@string/angry" />
 
         <CheckBox
             android:id="@+id/checkbox_disappointed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="DISAPPOINTED" />
+            android:text="@string/disappointed" />
 
         <CheckBox
             android:id="@+id/checkbox_bored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="BORED" />
+            android:text="@string/bored" />
 
         <CheckBox
             android:id="@+id/checkbox_lonely"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="LONELY" />
+            android:text="@string/lonely" />
 
         <TextView
             android:id="@+id/reasoningTitle"
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:paddingLeft="5dp"
-            android:text="Reasoning for Success/Relapse" />
+            android:text="@string/reasoning_title" />
 
         <EditText
             android:id="@+id/message_text"
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:paddingLeft="5dp"
-            android:text="Time of Day" />
+            android:text="@string/time_of_day" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,7 +141,7 @@
             android:layout_height="wrap_content"
             android:textSize="20dp"
             android:paddingLeft="5dp"
-            android:text="Location" />
+            android:text="@string/location" />
 
         <EditText
             android:id="@+id/location_text"
@@ -154,7 +154,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:text="Submit" />
+            android:text="@string/submit" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
