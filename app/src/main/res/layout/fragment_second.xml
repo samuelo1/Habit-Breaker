@@ -1,160 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".SecondFragment">
+    android:layout_height="match_parent">
 
-
-    <TextView
-        android:id="@+id/textview_second"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-<!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
-
-<!--    <Button-->
-<!--        android:id="@+id/button_second"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="@string/previous"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/input_layout" />-->
-
-    <LinearLayout
-        android:id="@+id/input_layout"
-        app:layout_constraintTop_toTopOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="16dp">
+        tools:context=".SecondFragment">
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-            <RadioButton
-                android:id="@+id/resistRadio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/resisted" />
-
-            <RadioButton
-                android:id="@+id/relapseRadio"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/relapsed" />
-
-        </RadioGroup>
 
         <TextView
-            android:id="@+id/emotionalStateTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:paddingLeft="5dp"
-            android:text="@string/emotion_state_title" />
-
-        <CheckBox
-            android:id="@+id/checkbox_happy"
+            android:id="@+id/textview_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/happy" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <!--    app:layout_constraintBottom_toTopOf="@id/button_second"-->
 
-        <CheckBox
-            android:id="@+id/checkbox_sad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/sad" />
-
-        <CheckBox
-            android:id="@+id/checkbox_angry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/angry" />
-
-        <CheckBox
-            android:id="@+id/checkbox_disappointed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/disappointed" />
-
-        <CheckBox
-            android:id="@+id/checkbox_bored"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/bored" />
-
-        <CheckBox
-            android:id="@+id/checkbox_lonely"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/lonely" />
-
-        <TextView
-            android:id="@+id/reasoningTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:paddingLeft="5dp"
-            android:text="@string/reasoning_title" />
-
-        <EditText
-            android:id="@+id/message_text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Type your reasoning here" />
-
-        <TextView
-            android:id="@+id/dateTimeTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:paddingLeft="5dp"
-            android:text="@string/time_of_day" />
+    <!--    <Button-->
+    <!--        android:id="@+id/button_second"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:text="@string/previous"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/input_layout" />-->
 
         <LinearLayout
+            android:id="@+id/input_layout"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="16dp">
 
-            <Spinner
-                android:id="@+id/timeSpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp" />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
 
-            <Spinner
-                android:id="@+id/amPmSpinner"
+                <RadioButton
+                    android:id="@+id/resistRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resisted" />
+
+                <RadioButton
+                    android:id="@+id/relapseRadio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/relapsed" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/emotionalStateTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingLeft="5dp"
+                android:text="@string/emotion_state_title" />
+
+            <CheckBox
+                android:id="@+id/checkbox_happy"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp" />
+                android:layout_height="wrap_content"
+                android:text="@string/happy" />
+
+            <CheckBox
+                android:id="@+id/checkbox_sad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sad" />
+
+            <CheckBox
+                android:id="@+id/checkbox_angry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/angry" />
+
+            <CheckBox
+                android:id="@+id/checkbox_disappointed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disappointed" />
+
+            <CheckBox
+                android:id="@+id/checkbox_bored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bored" />
+
+            <CheckBox
+                android:id="@+id/checkbox_lonely"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/lonely" />
+
+            <TextView
+                android:id="@+id/reasoningTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingLeft="5dp"
+                android:text="@string/reasoning_title" />
+
+            <EditText
+                android:id="@+id/message_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Type your reasoning here" />
+
+            <TextView
+                android:id="@+id/dateTimeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingLeft="5dp"
+                android:text="@string/time_of_day" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Spinner
+                    android:id="@+id/timeSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+
+                <Spinner
+                    android:id="@+id/amPmSpinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/locationTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:paddingLeft="5dp"
+                android:text="@string/location" />
+
+            <EditText
+                android:id="@+id/location_text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Type the location here" />
+
+            <Button
+                android:id="@+id/submit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="@string/submit" />
+
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/locationTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
-            android:paddingLeft="5dp"
-            android:text="@string/location" />
-
-        <EditText
-            android:id="@+id/location_text"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Type the location here" />
-
-        <Button
-            android:id="@+id/submit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:text="@string/submit" />
-
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
