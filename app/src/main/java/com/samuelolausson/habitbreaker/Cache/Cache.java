@@ -17,8 +17,8 @@ public class Cache {
     }
 
     private final Set<Habit> habits = new HashSet<>();
-    private final Set<SuccessEvent> successEvents = new HashSet<>();
-    private final Set<FailureEvent> failureEvents = new HashSet<>();
+    private final Set<Event> successEvents = new HashSet<>();
+    private final Set<Event> failureEvents = new HashSet<>();
 
     public void addHabit(Habit habit) {
         habits.add(habit);
@@ -28,19 +28,19 @@ public class Cache {
         return habits;
     }
 
-    public void addSuccessEvent(SuccessEvent successEvent) {
+    public void addSuccessEvent(Event successEvent) {
         successEvents.add(successEvent);
     }
 
-    public Set<SuccessEvent> getSuccessEvents() {
+    public Set<Event> getSuccessEvents() {
         return successEvents;
     }
 
-    public void addFailureEvent(FailureEvent failureEvent) {
+    public void addFailureEvent(Event failureEvent) {
         failureEvents.add(failureEvent);
     }
 
-    public Set<FailureEvent> getFailureEvents() {
+    public Set<Event> getFailureEvents() {
         return failureEvents;
     }
 
