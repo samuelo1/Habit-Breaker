@@ -1,94 +1,217 @@
 package com.samuelolausson.habitbreaker;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.samuelolausson.habitbreaker.Cache.Cache;
+import com.samuelolausson.habitbreaker.Cache.Event;
 import com.samuelolausson.habitbreaker.databinding.FragmentSecondBinding;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class SecondFragment extends Fragment {
 
+    private RadioButton resist;
+    private RadioButton relapse;
     private FragmentSecondBinding binding;
     private CheckBox checkBoxHappy;
     private CheckBox checkBoxSad;
     private CheckBox checkBoxAngry;
     private CheckBox checkBoxDisappointed;
     private CheckBox checkBoxBored;
+    private CheckBox checkBoxLonely;
     private EditText messageText;
+    private Spinner timeOfDay;
+    private Spinner amPm;
+    private EditText locationText;
     private Button submitButton;
+
+    //private Button previous;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        Cache myCache = Cache.getCacheInstance();
 
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         View view = inflater.inflate(R.layout.fragment_second, container, false);
 
+        resist = view.findViewById(R.id.resistRadio);
+        relapse = view.findViewById(R.id.relapseRadio);
         checkBoxHappy = view.findViewById(R.id.checkbox_happy);
         checkBoxSad = view.findViewById(R.id.checkbox_sad);
         checkBoxAngry = view.findViewById(R.id.checkbox_angry);
         checkBoxDisappointed = view.findViewById(R.id.checkbox_disappointed);
         checkBoxBored = view.findViewById(R.id.checkbox_bored);
+        checkBoxLonely = view.findViewById(R.id.checkbox_lonely);
         messageText = view.findViewById(R.id.message_text);
+        timeOfDay = view.findViewById(R.id.timeSpinner);
+        amPm = view.findViewById(R.id.amPmSpinner);
+        locationText = view.findViewById(R.id.location_text);
         submitButton = view.findViewById(R.id.submit_button);
+        //previous = view.findViewById(R.id.button_second);
 
+        ArrayAdapter<CharSequence> adapterTime = ArrayAdapter.createFromResource(this.getContext(), R.array.time_of_day, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapterTime.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        timeOfDay.setAdapter(adapterTime);
+
+        ArrayAdapter<CharSequence> adapterAmPm = ArrayAdapter.createFromResource(this.getContext(), R.array.am_pm, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapterAmPm.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        amPm.setAdapter(adapterAmPm);
+
+//        previous.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(SecondFragment.this)
+//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+//            }
+//        });
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // Get the day month and year
+                Date date = new Date();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                int year = calendar.get(Calendar.YEAR);
+                int monthInt = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                // Convert month int to string
+                String month = "";
+                switch (monthInt) {
+                    case 0:
+                        month = "January";
+                        break;
+                    case 1:
+                        month = "February";
+                        break;
+                    case 2:
+                        month = "March";
+                        break;
+                    case 3:
+                        month = "April";
+                        break;
+                    case 4:
+                        month = "May";
+                        break;
+                    case 5:
+                        month = "June";
+                        break;
+                    case 6:
+                        month = "July";
+                        break;
+                    case 7:
+                        month = "August";
+                        break;
+                    case 8:
+                        month = "September";
+                        break;
+                    case 9:
+                        month = "October";
+                        break;
+                    case 10:
+                        month = "November";
+                        break;
+                    default:
+                        month = "December";
+                        break;
+                }
+
                 // Get the text from the message text box
                 String message = messageText.getText().toString();
-
+                // Get the text from the location text box
+                String location = locationText.getText().toString();
+                // Get the text from the time spinner
+                String time = timeOfDay.getSelectedItem().toString();
+                // Get the text from the AmPm spinner
+                String amPmStr = amPm.getSelectedItem().toString();
+                // Initialize array and list
+                Event.EmotionalState[] emotionalStates = {};
+                List<Event.EmotionalState> emotionsList = new ArrayList<Event.EmotionalState>();
+                // Determine if this recording is for resist or relapse
                 // Process the checkbox selections
                 if (checkBoxHappy.isChecked()) {
-                    // Do something if happy is selected
+                    emotionsList.add(Event.EmotionalState.HAPPY);
                 }
                 if (checkBoxSad.isChecked()) {
-                    // Do something if sad is selected
+                    emotionsList.add(Event.EmotionalState.SAD);
                 }
                 if (checkBoxAngry.isChecked()) {
-                    // Do something if angry is selected
+                    emotionsList.add(Event.EmotionalState.ANGRY);
                 }
                 if (checkBoxDisappointed.isChecked()) {
-                    // Do something if disappointed is selected
+                    emotionsList.add(Event.EmotionalState.DISAPPOINTED);
                 }
                 if (checkBoxBored.isChecked()) {
-                    // Do something if bored is selected
+                    emotionsList.add(Event.EmotionalState.BORED);
                 }
-                //do something with the text box
+                if (checkBoxLonely.isChecked()) {
+                    emotionsList.add(Event.EmotionalState.LONELY);
+                }
+                // Convert list to our array
+                emotionalStates = emotionsList.toArray(emotionalStates);
+                Event newEvent = new Event(day, month, year, emotionalStates, location, message, time, amPmStr);
+
+                if (resist.isChecked()) {
+                    myCache.addSuccessEvent(newEvent);
+                }
+                else if (relapse.isChecked()) {
+                    myCache.addFailureEvent(newEvent);
+                }
+
                 // Clear the checkboxes and message text box
+                resist.setChecked(false);
+                relapse.setChecked(false);
                 checkBoxHappy.setChecked(false);
                 checkBoxSad.setChecked(false);
                 checkBoxAngry.setChecked(false);
                 checkBoxDisappointed.setChecked(false);
                 checkBoxBored.setChecked(false);
+                checkBoxLonely.setChecked(false);
                 messageText.setText("");
+                locationText.setText("");
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
 
         return view;
     }
 
-    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(SecondFragment.this)
-                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-            }
-        });
-    }
+//    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+//        super.onViewCreated(view, savedInstanceState);
+//
+//        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(SecondFragment.this)
+//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+//            }
+//        });
+//    }
 
     @Override
     public void onDestroyView() {
