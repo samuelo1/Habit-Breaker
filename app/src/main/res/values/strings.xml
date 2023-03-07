@@ -2,7 +2,7 @@
     <string name="app_name">Habit Breaker</string>
     <string name="title_activity_main">MainActivity</string>
     <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
+    <string name="first_fragment_label">Home</string>
     <string name="second_fragment_label">Record New Outcome</string>
     <string name="record_event">Record Event</string>
     <string name="previous">Previous</string>

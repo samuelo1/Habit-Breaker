@@ -1,6 +1,7 @@
 package com.samuelolausson.habitbreaker.Cache;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.Month;
 
 public class Event {
 
@@ -13,9 +14,7 @@ public class Event {
         LONELY,
     }
 
-    int day;
-    String month;
-    int year;
+    LocalDateTime dateTime;
     EmotionalState[] emotionalState;
     String location;
     String reasoning;
@@ -23,10 +22,8 @@ public class Event {
     String time;
     String amPm;
 
-    public Event(int day, String month, int year, EmotionalState[] emotionalState, String location, String reasoning, String time, String amPm) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+    public Event(LocalDateTime dateTime, EmotionalState[] emotionalState, String location, String reasoning, String time, String amPm) {
+        this.dateTime = dateTime;
         this.emotionalState = emotionalState;
         this.location = location;
         this.reasoning = reasoning;
@@ -34,26 +31,20 @@ public class Event {
         this.amPm = amPm;
     }
 
-    public int getDay() {
-        return day;
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
     }
 
-    public void setDay(int day) {
-        this.day = day;
-    }
-    public String getMonth() {
-        return month;
+    public int getDayOfMonth() {
+        return this.dateTime.getDayOfMonth();
     }
 
-    public void setMonth(String month) {
-        this.month = month;
+    public Month getMonth() {
+        return dateTime.getMonth();
     }
+
     public int getYear() {
-        return year;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
+        return dateTime.getYear();
     }
 
     public EmotionalState[] getEmotionalState() {

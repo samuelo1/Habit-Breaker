@@ -1,0 +1,141 @@
+package com.samuelolausson.habitbreaker;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
+
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.samuelolausson.habitbreaker.Cache.Cache;
+import com.samuelolausson.habitbreaker.Cache.Event;
+import com.samuelolausson.habitbreaker.databinding.FragmentSecondBinding;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+public class SecondFragment extends Fragment {
+
+    private FragmentSecondBinding binding;
+    private final Cache cache = Cache.getCacheInstance();
+
+    @Override
+    public View onCreateView(
+            LayoutInflater inflater, ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        LocalDateTime time1 = LocalDateTime.now();
+        LocalDateTime time2 = LocalDateTime.now();
+        LocalDateTime time3 = time1.minusDays(1);
+        LocalDateTime time4 = time1.minusDays(2);
+        LocalDateTime time5 = time1.minusDays(2);
+        LocalDateTime time6 = time1.minusDays(3);
+        LocalDateTime time7 = time1.minusDays(4);
+        cache.addFailureEvent(new FailureEvent(time1, Event.EmotionalState.ANGRY, null));
+        cache.addFailureEvent(new FailureEvent(time2, Event.EmotionalState.ANGRY, null));
+        cache.addFailureEvent(new FailureEvent(time3, Event.EmotionalState.ANGRY, null));
+        cache.addFailureEvent(new FailureEvent(time4, Event.EmotionalState.ANGRY, null));
+        cache.addFailureEvent(new FailureEvent(time5, Event.EmotionalState.ANGRY, null));
+        cache.addFailureEvent(new FailureEvent(time6, Event.EmotionalState.ANGRY, null));
+        cache.addFailureEvent(new FailureEvent(time7, Event.EmotionalState.ANGRY, null));
+
+        binding = FragmentSecondBinding.inflate(inflater, container, false);
+        binding.chart.setData(getDayOfWeekData(cache.getFailureEvents()));
+        binding.chart.invalidate(); // refresh
+
+        return binding.getRoot();
+
+    }
+
+    private <T extends Event> BarData getDayOfWeekData(Set<T> events) {
+        List<BarEntry> entries = new ArrayList<>();
+
+        Map<Integer, Integer> counts = new HashMap<>();
+
+        for (T event : events) {
+            int eventKey = event.getDate().getDayOfWeek().getValue();
+            if(!counts.containsKey(eventKey)) {
+                counts.put(eventKey, 1);
+            } else {
+                counts.put(eventKey, counts.get(eventKey) + 1);
+            }
+            // turn your data into Entry objects
+            entries.add(new BarEntry(event.getDate().getDayOfWeek().getValue(), counts.get(eventKey)));
+        }
+
+        BarDataSet dataSet = new BarDataSet(entries, "Label"); // add entries to dataset
+        return new BarData(dataSet);
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(SecondFragment.this)
+                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
+            }
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+}
+
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SecondFragment">
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toTopOf="@id/button_second"
+        app:layout_constraintBaseline_toTopOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/textview_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/button_second"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/previous"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_second" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,7 @@ import com.samuelolausson.habitbreaker.Cache.Event;
 import com.samuelolausson.habitbreaker.databinding.FragmentSecondBinding;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -96,49 +97,7 @@ public class SecondFragment extends Fragment {
                 Date date = new Date();
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(date);
-                int year = calendar.get(Calendar.YEAR);
-                int monthInt = calendar.get(Calendar.MONTH);
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                // Convert month int to string
-                String month = "";
-                switch (monthInt) {
-                    case 0:
-                        month = "January";
-                        break;
-                    case 1:
-                        month = "February";
-                        break;
-                    case 2:
-                        month = "March";
-                        break;
-                    case 3:
-                        month = "April";
-                        break;
-                    case 4:
-                        month = "May";
-                        break;
-                    case 5:
-                        month = "June";
-                        break;
-                    case 6:
-                        month = "July";
-                        break;
-                    case 7:
-                        month = "August";
-                        break;
-                    case 8:
-                        month = "September";
-                        break;
-                    case 9:
-                        month = "October";
-                        break;
-                    case 10:
-                        month = "November";
-                        break;
-                    default:
-                        month = "December";
-                        break;
-                }
+                LocalDateTime dateTime = LocalDateTime.now();
 
                 // Get the text from the message text box
                 String message = messageText.getText().toString();
@@ -173,7 +132,7 @@ public class SecondFragment extends Fragment {
                 }
                 // Convert list to our array
                 emotionalStates = emotionsList.toArray(emotionalStates);
-                Event newEvent = new Event(day, month, year, emotionalStates, location, message, time, amPmStr);
+                Event newEvent = new Event(dateTime, emotionalStates, location, message, time, amPmStr);
 
                 if (resist.isChecked()) {
                     myCache.addSuccessEvent(newEvent);
