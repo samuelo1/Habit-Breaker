@@ -1,6 +1,5 @@
 package com.samuelolausson.habitbreaker.Cache;
 
-import java.util.Date;
 
 public class Event {
 

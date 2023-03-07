@@ -80,6 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/sad" />
 
+
             <CheckBox
                 android:id="@+id/checkbox_angry"
                 android:layout_width="wrap_content"
