@@ -50,19 +50,19 @@ public class MainActivity extends AppCompatActivity {
         Cache myCache = Cache.getCacheInstance();
         // Relapse Event
         Event.EmotionalState[] event1Emotions = {Event.EmotionalState.ANGRY, Event.EmotionalState.LONELY};
-        Event event1 = new Event(3, "February", 2023, event1Emotions, "house", "retribution", "8:00", "PM");
+        Event event1 = new Event(3, "February", 2023, event1Emotions,  "retribution", "8:00", "PM", 40.23904, -111.65615);
         myCache.addFailureEvent(event1);
         // Relapse Event
         Event.EmotionalState[] event2Emotions = {Event.EmotionalState.ANGRY};
-        Event event2 = new Event(9, "February", 2023, event2Emotions, "house", "I earned it", "8:30", "PM");
+        Event event2 = new Event(9, "February", 2023, event2Emotions,  "I earned it", "8:30", "PM", 40.23904, -111.65615);
         myCache.addFailureEvent(event2);
         // Resist Event
         Event.EmotionalState[] event3Emotions = {Event.EmotionalState.HAPPY};
-        Event event3 = new Event(12, "February", 2023, event2Emotions, "house", "Focused on my end goal", "7:30", "PM");
+        Event event3 = new Event(12, "February", 2023, event2Emotions,  "Focused on my end goal", "7:30", "PM", 40.23904, -111.65615);
         myCache.addSuccessEvent(event3);
         // Resist Event
         Event.EmotionalState[] event4Emotions = {Event.EmotionalState.ANGRY};
-        Event event4 = new Event(14, "February", 2023, event2Emotions, "house", "Left the house", "7:30", "PM");
+        Event event4 = new Event(14, "February", 2023, event2Emotions,  "Left the house", "7:30", "PM", 40.23904, -111.65615);
         myCache.addSuccessEvent(event4);
     }
 }

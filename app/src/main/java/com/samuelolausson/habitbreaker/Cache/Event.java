@@ -20,18 +20,22 @@ public class Event {
     String location;
     String reasoning;
 
+    double latitude;
+    double longitude;
+
     String time;
     String amPm;
 
-    public Event(int day, String month, int year, EmotionalState[] emotionalState, String location, String reasoning, String time, String amPm) {
+    public Event(int day, String month, int year, EmotionalState[] emotionalState, String reasoning, String time, String amPm, double latitude,double longitude) {
         this.day = day;
         this.month = month;
         this.year = year;
         this.emotionalState = emotionalState;
-        this.location = location;
         this.reasoning = reasoning;
         this.time = time;
         this.amPm = amPm;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public int getDay() {

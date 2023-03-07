@@ -23,6 +23,19 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.widget.Toast;
+
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+
+
 public class SecondFragment extends Fragment {
 
     private RadioButton resist;
@@ -37,7 +50,6 @@ public class SecondFragment extends Fragment {
     private EditText messageText;
     private Spinner timeOfDay;
     private Spinner amPm;
-    private EditText locationText;
 
     @Override
     public View onCreateView(
@@ -59,9 +71,8 @@ public class SecondFragment extends Fragment {
         messageText = view.findViewById(R.id.message_text);
         timeOfDay = view.findViewById(R.id.timeSpinner);
         amPm = view.findViewById(R.id.amPmSpinner);
-        locationText = view.findViewById(R.id.location_text);
         Button submitButton = view.findViewById(R.id.submit_button);
-        //previous = view.findViewById(R.id.button_second);
+
 
         ArrayAdapter<CharSequence> adapterTime = ArrayAdapter.createFromResource(this.getContext(), R.array.time_of_day, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
@@ -124,10 +135,25 @@ public class SecondFragment extends Fragment {
                     break;
             }
 
+
+            // Get the location manager
+            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+
+            // Check if location services are enabled
+            if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // Request permission to access location
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                return;
+            }
+
+            // Get the last known location
+            Location location2 = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            double latitude = location2.getLatitude();
+            double longitude = location2.getLongitude();
+            // Store the location
+
             // Get the text from the message text box
             String message = messageText.getText().toString();
-            // Get the text from the location text box
-            String location = locationText.getText().toString();
             // Get the text from the time spinner
             String time = timeOfDay.getSelectedItem().toString();
             // Get the text from the AmPm spinner
@@ -157,7 +183,8 @@ public class SecondFragment extends Fragment {
             }
             // Convert list to our array
             emotionalStates = emotionsList.toArray(emotionalStates);
-            Event newEvent = new Event(day, month, year, emotionalStates, location, message, time, amPmStr);
+            //Toast.makeText(getContext(), "Latitude: " + latitude + ", Longitude: " + longitude, Toast.LENGTH_SHORT).show();
+            Event newEvent = new Event(day, month, year, emotionalStates, message, time, amPmStr, latitude,longitude);
 
             if (resist.isChecked()) {
                 myCache.addSuccessEvent(newEvent);
@@ -176,7 +203,6 @@ public class SecondFragment extends Fragment {
             checkBoxBored.setChecked(false);
             checkBoxLonely.setChecked(false);
             messageText.setText("");
-            locationText.setText("");
             // return to first fragment
             NavHostFragment.findNavController(SecondFragment.this)
                     .navigate(R.id.action_SecondFragment_to_FirstFragment);
@@ -190,6 +216,19 @@ public class SecondFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         view = null;
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted
+            } else {
+                // Permission denied
+            }
+        }
     }
 
 }
