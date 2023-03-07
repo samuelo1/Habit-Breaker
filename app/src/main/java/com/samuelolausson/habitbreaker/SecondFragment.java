@@ -1,11 +1,10 @@
 package com.samuelolausson.habitbreaker;
 
-import android.app.Activity;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -13,15 +12,13 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.samuelolausson.habitbreaker.Cache.Cache;
 import com.samuelolausson.habitbreaker.Cache.Event;
-import com.samuelolausson.habitbreaker.databinding.FragmentSecondBinding;
 
-import java.time.LocalDate;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -32,7 +29,7 @@ public class SecondFragment extends Fragment {
 
     private RadioButton resist;
     private RadioButton relapse;
-    private FragmentSecondBinding binding;
+    private View view;
     private CheckBox checkBoxHappy;
     private CheckBox checkBoxSad;
     private CheckBox checkBoxAngry;
@@ -43,9 +40,6 @@ public class SecondFragment extends Fragment {
     private Spinner timeOfDay;
     private Spinner amPm;
     private EditText locationText;
-    private Button submitButton;
-
-    //private Button previous;
 
     @Override
     public View onCreateView(
@@ -54,8 +48,7 @@ public class SecondFragment extends Fragment {
     ) {
         Cache myCache = Cache.getCacheInstance();
 
-        binding = FragmentSecondBinding.inflate(inflater, container, false);
-        View view = inflater.inflate(R.layout.fragment_second, container, false);
+        view = inflater.inflate(R.layout.fragment_second, container, false);
 
         resist = view.findViewById(R.id.resistRadio);
         relapse = view.findViewById(R.id.relapseRadio);
@@ -69,7 +62,7 @@ public class SecondFragment extends Fragment {
         timeOfDay = view.findViewById(R.id.timeSpinner);
         amPm = view.findViewById(R.id.amPmSpinner);
         locationText = view.findViewById(R.id.location_text);
-        submitButton = view.findViewById(R.id.submit_button);
+        Button submitButton = view.findViewById(R.id.submit_button);
         //previous = view.findViewById(R.id.button_second);
 
         ArrayAdapter<CharSequence> adapterTime = ArrayAdapter.createFromResource(this.getContext(), R.array.time_of_day, android.R.layout.simple_spinner_item);
@@ -136,8 +129,7 @@ public class SecondFragment extends Fragment {
 
                 if (resist.isChecked()) {
                     myCache.addSuccessEvent(newEvent);
-                }
-                else if (relapse.isChecked()) {
+                } else if (relapse.isChecked()) {
                     myCache.addFailureEvent(newEvent);
                 }
 
@@ -156,26 +148,14 @@ public class SecondFragment extends Fragment {
                         .navigate(R.id.action_SecondFragment_to_FirstFragment);
             }
         });
-
         return view;
     }
 
-//    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//
-//        binding.buttonSecond.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                NavHostFragment.findNavController(SecondFragment.this)
-//                        .navigate(R.id.action_SecondFragment_to_FirstFragment);
-//            }
-//        });
-//    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        view = null;
     }
 
 }
